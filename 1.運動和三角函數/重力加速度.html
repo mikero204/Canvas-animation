@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            box-shadow: 4px 4px 12px rgb(0,0,0,0.5);
+            position: absolute;
+            left:10%;
+            top:5%
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script src="../js/utils.js"></script>
+<script src="components/ball.js"></script>
+<script src="components/arrow.js"></script>
+<script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = 800;
+    let H = canvas.height = 600;
+    const ball = new Ball({
+        x:W/2,y:100,r:30 
+    }).render(ctx);
+
+    let mouse = utils.getOffset(canvas);
+    // let vx = 0 ;
+    // let ax = 0.1;
+    let g=0.2,vy=0;
+
+    (function move(){
+        window.requestAnimationFrame(move);
+
+
+     
+        
+        ctx.clearRect(0,0,W,H);
+        ball.y +=vy
+        vy+=g
+        if(ball.y+ball.r>H){
+            ball.y = H - ball.r
+            vy *= -0.8
+            
+            if(Math.abs(vy)<1.5){
+               
+                vy = 0
+            }
+        }
+
+        ball.render(ctx)
+    })()
+
+</script>
+</html>

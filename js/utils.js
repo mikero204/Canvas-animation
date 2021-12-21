@@ -23,3 +23,6 @@ utils.toRad = function (radius) {
 utils.toAngle = function (rad) {
   return (rad * 180) / Math.PI;
 };
+utils.getRandom = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};

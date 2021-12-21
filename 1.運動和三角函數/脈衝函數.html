@@ -26,15 +26,13 @@
     let H = canvas.height = 600
     const ball =  new Ball({x:W/2,y:H/2,r:50}).render(ctx)
     let angle = 0
-    let vx = 1
-    let vy = 0.5
-    const SWING = 160;
+    let initScale =1
+    const SWING = 0.5;
     (function move(){
         window.requestAnimationFrame(move)
         ctx.clearRect(0,0,W,H)
-        // ball.x = W/2+Math.sin(angle)*SWING
-        ball.x += vx
-        ball.y = H/2+Math.sin(angle)* SWING
+        ball.scaleX = ball.scaleY =initScale + Math.sin(angle) * SWING
+
         angle += 0.05
         angle %= Math.PI*2
         ball.render(ctx)

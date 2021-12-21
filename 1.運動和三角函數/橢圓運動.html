@@ -20,31 +20,34 @@
 <script src="../js/utils.js"></script>
 <script src="components/ball.js"></script>
 <script>
-    const canvas = document.querySelector('canvas')
-    const ctx = canvas.getContext('2d')
-    let W = canvas.width = 800
-    let H = canvas.height = 600
-    const ball =  new Ball({x:W/2,y:H/2,r:50}).render(ctx)
-    let angle = 0
-    let vx = 1
-    let vy = 0.5
-    const SWING = 160;
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = 800;
+    let H = canvas.height = 600;
+    const ball =  new Ball({x:W/2,y:H/2,r:35}).render(ctx);
+    let Rx = 200;
+    let Ry = 80;
+    let speed =0.02;
+    let angle = 0;
     (function move(){
         window.requestAnimationFrame(move)
         ctx.clearRect(0,0,W,H)
-        // ball.x = W/2+Math.sin(angle)*SWING
-        ball.x += vx
-        ball.y = H/2+Math.sin(angle)* SWING
-        angle += 0.05
+        ctx.save()
+        ctx.translate(W/2,H/2)
+        ctx.scale(1,0.4)
+        ctx.beginPath()
+        ctx.arc(0,0,Rx,0,Math.PI*2)
+        ctx.stroke()
+        ctx.restore()
+        ball.x = W/2+Rx*Math.cos(angle)
+        ball.y = H/2+Ry*Math.sin(angle)
+        angle -= speed
         angle %= Math.PI*2
         ball.render(ctx)
-    })()
+    })();
 
     let pos = utils.getOffset(canvas)
 
 
-    canvas.onclick = function(){
-        
-    }
 </script>
 </html>

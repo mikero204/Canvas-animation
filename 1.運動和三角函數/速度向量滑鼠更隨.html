@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            box-shadow: 4px 4px 12px rgb(0,0,0,0.5);
+            position: absolute;
+            left:10%;
+            top:5%
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script src="../js/utils.js"></script>
+<script src="components/ball.js"></script>
+<script src="components/arrow.js"></script>
+<script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = 800;
+    let H = canvas.height = 600;
+    const arrow = new Arrow({
+        x:W/2,y:H/2,w:140,h:60
+    }).render(ctx);
+
+    let mouse = utils.getOffset(canvas);
+    let speed = 3 ;
+
+    (function move(){
+        window.requestAnimationFrame(move);
+        let dx = mouse.x - arrow.x;
+        let dy = mouse.y - arrow.y;
+        let angle = Math.atan2(dy,dx);
+        let vx = speed * Math.cos(angle);
+        let vy = speed * Math.sin(angle);
+        console.log(Math.abs(dx))
+        if(Math.abs(dx)>3||Math.abs(dy)>3){
+        arrow.x += vx;
+        arrow.y += vy;
+        arrow.rotation = angle;
+
+        }
+
+        
+       
+        
+     
+    
+     
+        
+        ctx.clearRect(0,0,W,H);
+        arrow.render(ctx);
+    })()
+
+</script>
+</html>
