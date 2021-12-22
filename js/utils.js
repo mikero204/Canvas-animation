@@ -26,3 +26,15 @@ utils.toAngle = function (rad) {
 utils.getRandom = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
+utils.rp = function (arr, float) {
+  const max = Math.max(...arr);
+  const min = Math.min(...arr);
+  const num = Math.random() * (max - min) + min;
+  return float ? num : Math.round(num);
+};
+
+utils.getRgb = function () {
+  return `rgb(${utils.rp([55, 255])},${utils.rp([55, 255])},${utils.rp([
+    55, 255,
+  ])})`;
+};
