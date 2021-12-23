@@ -38,3 +38,6 @@ utils.getRgb = function () {
     55, 255,
   ])})`;
 };
+utils.rectDuang = function (rect1, rect2) {
+  return;
+};
