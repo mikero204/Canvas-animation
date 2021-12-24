@@ -39,5 +39,30 @@ utils.getRgb = function () {
   ])})`;
 };
 utils.rectDuang = function (rect1, rect2) {
-  return;
+  return (
+    rect1.x + rect1.w >= rect2.x &&
+    rect1.x <= rect2.x + rect2.w &&
+    rect1.y + rect1.h >= rect2.y &&
+    rect1.y <= rect2.y + rect2.h
+  );
+};
+
+utils.getDist = function (x1, y1, x2, y2) {
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+};
+
+utils.checkBallBounce = function (ball, W, H, bounce) {
+  if (ball.x - ball.r <= 0) {
+    ball.x = ball.r;
+    ball.vx *= bounce;
+  } else if (ball.x + ball.r >= W) {
+    ball.x = W - ball.r;
+    ball.vx *= bounce;
+  } else if (ball.y + ball.r >= H) {
+    ball.y = H - ball.r;
+    ball.vy *= bounce;
+  } else if (ball.y - ball.r <= 0) {
+    ball.y = ball.r;
+    ball.vy *= bounce;
+  }
 };
